@@ -49,10 +49,9 @@ public class FileUploadDownloadService {
                 throw new FileUploadException("파일명에 부적합 문자가 포함되어 있습니다. " + fileName);
 
             Path targetLocation = this.fileLocation.resolve(fileName);
-
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            Image uploadFile = new Image(fileName, file.getSize(), file.getContentType());
+            Image uploadFile = new Image(fileName, file.getSize(), file.getContentType(), targetLocation.toString());
             fileDAO.save(uploadFile);
 
             return uploadFile;

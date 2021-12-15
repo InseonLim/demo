@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name="Image")
 public class Image {
 
@@ -27,15 +29,19 @@ public class Image {
     @Column(name="mime_type")
     private String mimeType;
 
+    @Column(name="path")
+    private String path;
+
     @CreationTimestamp
     @Column(name="insert_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date insertDate;
 
-    public Image(String fileName, long size, String mimeType){
+    public Image(String fileName, long size, String mimeType, String path){
         this.fileName = fileName;
         this.size = size;
         this.mimeType = mimeType;
+        this.path = path;
     }
 
     public int getId(){
