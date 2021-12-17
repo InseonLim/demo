@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 
+import com.example.demo.payload.FileUploadResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -45,19 +47,17 @@ public class DemoController {
     }
 
     @PostMapping("/uploadFile")
-    public Image uploadFile(@RequestParam("file") MultipartFile file) {
-        Image image = service.storeFile(file);
-        return image;
+    public String uploadFile(@RequestParam("file") MultipartFile file) {
+        String name = service.storeFile(file);
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(name)
+                .toUriString();
+
+        return fileDownloadUri;
     }
 
 
-    @PostMapping("/uploadMultipleFiles")
-    public List<Image> uploadMultipleFiles(@RequestParam("files") MultipartFile files) {
-        return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
-    }
 
 
     @GetMapping("/downloadFile/{fileName:.+}")
