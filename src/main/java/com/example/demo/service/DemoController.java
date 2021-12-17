@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
 
-
-import com.example.demo.payload.FileUploadResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -18,10 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Slf4j
 @RestController
@@ -31,20 +26,14 @@ public class DemoController {
     private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
     private final FileUploadDownloadService service;
 
-    @GetMapping("/")
-    public String controllerMain() {
-        return "Hello Test";
-    }
-
+   /*
     @GetMapping("/uploadFiles")
     public Iterable<Image> getUploadFileList() {
         return service.getFileList();
     }
 
-    @GetMapping("/uploadFile/{id}")
-    public Optional<Image> uploadFile(@PathVariable int id) {
-        return service.getImage(id);
-    }
+    */
+
 
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
@@ -56,9 +45,6 @@ public class DemoController {
 
         return fileDownloadUri;
     }
-
-
-
 
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
