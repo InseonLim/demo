@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.file_api;
 
 
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,9 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class DemoController {
+public class FileController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
     private final FileUploadDownloadService service;
 
    /*
@@ -31,7 +31,6 @@ public class DemoController {
     public Iterable<Image> getUploadFileList() {
         return service.getFileList();
     }
-
     */
 
 
@@ -42,7 +41,6 @@ public class DemoController {
                 .path("/downloadFile/")
                 .path(name)
                 .toUriString();
-
         return fileDownloadUri;
     }
 

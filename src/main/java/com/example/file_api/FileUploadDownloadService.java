@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.file_api;
 
-import com.example.demo.exception.FileDownloadException;
-import com.example.demo.exception.FileUploadException;
+import com.example.file_api.exception.FileDownloadException;
+import com.example.file_api.exception.FileUploadException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -9,19 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.logging.Logger;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
+@Slf4j
 @Service
 public class FileUploadDownloadService {
     private final Path fileLocation;
-    private final static Logger LOG = Logger.getGlobal();
+    //private final static Logger LOG = Logger.getGlobal();
     @Autowired
-    public FileUploadDownloadService(DemoProperties prop){
+    public FileUploadDownloadService(FileProperties prop){
         this.fileLocation = Paths.get(prop.getUploadDir()).toAbsolutePath().normalize();
         try{
             Files.createDirectories(this.fileLocation);
@@ -32,7 +32,7 @@ public class FileUploadDownloadService {
 
     public String storeFile(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        LOG.info(fileName);
+        log.info(fileName);
         try {
             // 파일명에 부적합 문자가 있는지 확인한다.
             if(fileName.contains(".."))

@@ -1,18 +1,17 @@
-package com.example.demo;
+package com.example.file_api;
 
-import com.example.demo.service.DemoProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
-        DemoProperties.class
+        FileProperties.class
 })
-public class DemoApplication {
+public class FileApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(FileApplication.class, args);
     }
 
 }

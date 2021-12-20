@@ -1,4 +1,4 @@
-package com.example.demo.exception;
+package com.example.file_api.exception;
 
 public class FileUploadException extends RuntimeException {
     public FileUploadException(String message){
