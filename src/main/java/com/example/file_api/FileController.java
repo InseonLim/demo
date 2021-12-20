@@ -3,8 +3,6 @@ package com.example.file_api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -22,11 +20,9 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 public class FileController {
-
-    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
     private final FileUploadDownloadService service;
 
-   /*
+    /*
     @GetMapping("/uploadFiles")
     public Iterable<Image> getUploadFileList() {
         return service.getFileList();
@@ -51,7 +47,7 @@ public class FileController {
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
-            logger.info("Could not determine file type.");
+            log.info("Could not determine file type.");
         }
         if (contentType == null) {
             contentType = "application/octet-stream";

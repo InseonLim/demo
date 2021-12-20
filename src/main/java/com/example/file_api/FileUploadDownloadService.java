@@ -19,7 +19,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileUploadDownloadService {
     private final Path fileLocation;
-    //private final static Logger LOG = Logger.getGlobal();
+
     @Autowired
     public FileUploadDownloadService(FileProperties prop){
         this.fileLocation = Paths.get(prop.getUploadDir()).toAbsolutePath().normalize();
